@@ -21,7 +21,7 @@ const App = () =>{
         setAllWorkout(response.data)
 
       })
-      
+
   },[])
   
   const newDate = (event)=>{
@@ -59,9 +59,12 @@ const App = () =>{
 
   const formSubmit = (event) =>{
     event.preventDefault()
-    console.log(newWorkoutDate)
-    console.log(newWorkoutTime)
-    console.log(Workout)
+    axios
+      .post('http://localhost:3000/workout')
+      .then(()=>{
+        
+        
+      })
     event.currentTarget.reset()
   }
 
