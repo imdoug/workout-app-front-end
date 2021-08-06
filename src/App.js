@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios'
+import UserForm from './components/user';
 
 const App = () =>{
 
@@ -13,9 +14,6 @@ const App = () =>{
   const [Workout, setNewWorkout] = useState({})
   // const [allWorkouts, setWorkouts] = useState = []
 
-
-
-  
   const newDate = (event)=>{
     setNewWorkoutDate(event.target.value)
   }
@@ -52,12 +50,15 @@ const App = () =>{
     event.preventDefault()
     console.log("im working!")
     axios
-      .post('http://localhost:3000/workout')
+      .post('http://localhost:3000/workout', 
+      {
+        
+      })
       .then(()=>{
+        axios()
       })
     event.currentTarget.reset()
   }
-
   return (
     <>
       <h1>Workout App</h1>
