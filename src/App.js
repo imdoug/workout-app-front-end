@@ -16,11 +16,12 @@ const App = () =>{
 
   useEffect(()=>{
     axios 
-      .get('http://localhost:3000/birds')
+      .get('http://localhost:3000/workout')
       .then((response)=>{
         setAllWorkout(response.data)
 
       })
+      
   },[])
   
   const newDate = (event)=>{
@@ -67,8 +68,8 @@ const App = () =>{
   return (
     <>
       <h1>Workout App</h1>
-      <form onSubmit={(event)=>{formSubmit(event)}}>
-        Date: <input type="text" onChange={newDate}/><br/>
+      <form className="workout-form" onSubmit={(event)=>{formSubmit(event)}}>
+        Date: <input type="date" onChange={newDate}/><br/>
         Time: <input type="text" onChange={newTime}/><br/>
         Wordkout: <br/>
         Area: <input type="text" onChange={newArea}/><br/>
