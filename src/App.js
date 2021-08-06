@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios'
-import UserForm from './components/user';
 
 const App = () =>{
 
@@ -80,7 +79,7 @@ const App = () =>{
   const formSubmit = (event) =>{
     event.preventDefault()
     console.log("im working!");
-    axios.post('http://localhost:3000/workout',
+    axios.post('http://localhost:3000/workout/new',
       {
         date: newWorkoutDate,
         time: newWorkoutTime,
@@ -97,31 +96,51 @@ const App = () =>{
       })
     event.currentTarget.reset()
   }
+
+  // //DELETE FUNCTION -
+  // const deleteWorkout = (workoutData) =>{
+  //   console.log(workoutData._id)
+  // //   // axios
+  // //   //   .delete(`http://localhost:3000/workout/${workoutData}`)
+  // //   //   .then(()=>{
+  // //   //     getData()
+  // //   //   })
+  // }
   return (
     <>
       <h1>Workout App</h1>
-      <form className="form-control" onClick={(event)=>{formSubmit(event)}}>
-        Date: <input className="form-control" type="text" onChange={newDate}/>
-        Time: <input className="form-control" type="text" onChange={newTime}/>
-        Workout: 
-        Area: <input className="form-control" type="text" onChange={newArea}/>
-        Exercise: <input className="form-control" type="text" onChange={newExercise}/>
-        Sets: <input className="form-control" type="number" onChange={newSets}/>
-        Reps: <input className="form-control" type="number" onChange={newReps}/>
-        Weight: <input className="form-control" type="text" onChange={newWeight}/>
-        Meal: <input className="form-control" type="text" onChange={newWorkoutMeal}/>
-        Comments: <input className="form-control" type="text" onChange={newWorkoutComment}/>
-        <input type="submit" value="submit"/>
-      </form>
-      <div>
+      <details>
+        <form className="form-control" onClick={(event)=>{formSubmit(event)}}>
+          Date: <input className="form-control" type="text" onChange={newDate}/>
+          Time: <input className="form-control" type="text" onChange={newTime}/>
+          Workout: 
+          Area: <input className="form-control" type="text" onChange={newArea}/>
+          Exercise: <input className="form-control" type="text" onChange={newExercise}/>
+          Sets: <input className="form-control" type="number" onChange={newSets}/>
+          Reps: <input className="form-control" type="number" onChange={newReps}/>
+          Weight: <input className="form-control" type="text" onChange={newWeight}/>
+          Meal: <input className="form-control" type="text" onChange={newWorkoutMeal}/>
+          Comments: <input className="form-control" type="text" onChange={newWorkoutComment}/>
+          <input type="submit" value="submit"/>
+        </form>
+      </details>
+      <div className="Workouts">
         {
           allWorkouts.map((workout) =>{
-            return <p>{workout.exercise}</p>
+            return <>
+              <p>{workout.exercise}</p>
+              <button type="button">DELETE</button>
+            </>
           })
         }
-
-
       </div>
+      <details >
+        <form className="userForm">
+        Username: <input type="text"/><br/>
+        Password: <input type="password"/><br/>
+        <input type="submit"/>
+        </form>
+      </details>
     </>
   );
 }
