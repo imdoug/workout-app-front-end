@@ -51,6 +51,11 @@ const App = () =>{
   const formSubmit = (event) =>{
     event.preventDefault()
     console.log("im working!")
+    axios
+      .post('http://localhost:3000/workout')
+      .then(()=>{
+      })
+    event.currentTarget.reset()
   }
 
   return (
