@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import './App.css';
 import axios from 'axios'
 
@@ -10,9 +10,19 @@ const App = () =>{
   const [newWorkoutExercise, setNwWorkoutExercise] = useState('')
   const [newWorkoutReps, setNewWorkoutReps] = useState(0)
   const [newWorkoutWeight, setNewWorkoutWeight] = useState('')
-  const [Workout, setNewWorkout] = useState({})
+  const [Workout, setNewWorkout] = useState('')
+  const [allWorkout, setAllWorkout] = useState([])
   // const [allWorkouts, setWorkouts] = useState = []
 
+  useEffect(()=>{
+    axios 
+      .get('http://localhost:3000/workout')
+      .then((response)=>{
+        setAllWorkout(response.data)
+
+      })
+      
+  },[])
   
   const newDate = (event)=>{
     setNewWorkoutDate(event.target.value)
@@ -35,7 +45,7 @@ const App = () =>{
   }
   const newWeight = (event)=>{
     setNewWorkoutWeight(event.target.value)
-    
+  
   }
   const newWorkout = (event)=>{
     setNewWorkout({
@@ -46,23 +56,27 @@ const App = () =>{
     })
     
   }
+
   const formSubmit = (event) =>{
     event.preventDefault()
-    console.log("im working!")
+    console.log(newWorkoutDate)
+    console.log(newWorkoutTime)
+    console.log(Workout)
+    event.currentTarget.reset()
   }
 
   return (
     <>
       <h1>Workout App</h1>
-      <form onClick={(event)=>{formSubmit(event)}}>
-        Date: <input type="text" onChange={newDate}/>
-        Time: <input type="text" onChange={newTime}/>
-        Wordkout: 
-        Area: <input type="text" onChange={newArea}/>
-        Exercise: <input type="text" onChange={newExercise}/>
-        Reps: <input type="number" onChange={newReps}/>
-        Weight: <input type="text" onChange={newWeight}/>
-        <input type="submit" value="submit"/>
+      <form className="workout-form" onSubmit={(event)=>{formSubmit(event)}}>
+        Date: <input type="date" onChange={newDate}/><br/>
+        Time: <input type="text" onChange={newTime}/><br/>
+        Wordkout: <br/>
+        Area: <input type="text" onChange={newArea}/><br/>
+        Exercise: <input type="text" onChange={newExercise}/><br/>
+        Reps: <input type="number" onChange={newReps}/><br/>
+        Weight: <input type="text" onChange={newWeight}/><br/>
+        <input type="submit" value="submit" onClick={newWorkout}/>
       </form>
     </>
   );
