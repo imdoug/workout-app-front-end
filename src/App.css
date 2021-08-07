@@ -1,3 +1,118 @@
-form{
-  width: 55%;
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+body{
+  font-family: 'Karla', sans-serif;
+  background: rgba(0,0,0,1);
+  color: #fff;
 }
+h1{
+  padding-top: 20px;
+  font-size: 4em;
+  font-family: 'Anton', sans-serif;
+
+  text-align: center;
+  color: #fff;
+}
+h1 span{
+  color: #fffa00;
+}
+/* create form */
+.workoutForm{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+form{
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid #fffa00;
+  justify-content: space-between;
+  width: 20%;
+  padding: 20px;
+  margin-bottom: 4%;
+}
+form input{
+  width: 100%;
+}
+form input[type="submit"]{
+  font-size: 0.8em;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  background: #fff; 
+  margin: 0 auto;
+  width: 50%;
+}
+form input[type="submit"]:hover{
+  background: #FEFD67;
+  color: #000;
+  border: 1px solid #FEFD67;
+}
+/* workout cards */
+h3{
+  font-family: 'Anton', sans-serif;
+}
+.workout-item{
+  text-align: center;
+  width: 19%;
+  /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2); */
+  padding: 20px;
+  margin-bottom: 1%;
+  color: #fff;
+  background: #1C1C1C;
+}
+.workout-item button{
+  font-size: 0.8em;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #fff;
+  border: 1px solid #fffa00;
+  background: #1C1C1C; 
+}
+.workout-item button:hover{
+  /* animation-name: buttonAnimation;
+  animation-duration: 1s;
+  animation-iteration-count: infinite; */
+  background: #FEFD67;
+  color: #000;
+  border: 1px solid #FEFD67;
+}
+.Workouts{
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  flex-wrap: wrap;
+}
+.date{
+  margin-bottom: 0;
+}
+.time{
+  margin-top: 0;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
+}
+/* details */
+
+details{
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+
+/* hover button animation */
+/* @keyframes buttonAnimation {
+  0%{
+    background: #fff;
+  }
+  100%{
+    background: #f85327;
+  }
+} */
