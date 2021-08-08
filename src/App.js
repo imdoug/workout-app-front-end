@@ -5,7 +5,7 @@ import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
 
 const App = () =>{
-
+// WORKOUTS STATES 
   const [newWorkoutDate, setNewWorkoutDate] = useState('')
   const [newWorkoutTime, setNewWorkoutTime] = useState('')
   const [newWorkoutArea, setNewWorkoutArea] = useState('')
@@ -16,8 +16,12 @@ const App = () =>{
   const [newMeal, setNewMeal] = useState([])
   const [newComment, setNewComments] = useState([])
   const [editWorkout, setEditWorkout] = useState({})
-  // const [Workout, setNewWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
+
+// USER STATES 
+
+  const [newUsername, setNewUsername] = useState('')
+  const [newPassword, setNewPassword] = useState('')
 
   //GET UPDATED DATA
   const getData = () => {
@@ -32,7 +36,7 @@ const App = () =>{
     getData();
   },[])
 
-
+// WORKOUTS
   const newDate = (event)=>{
     setNewWorkoutDate(event.target.value)
   }
@@ -59,6 +63,14 @@ const App = () =>{
   }
   const newWorkoutComment = (event)=>{
     setNewComments(event.target.value) 
+  }
+
+  //USER 
+  const createNewUsername = (event)=>{
+    setNewUsername(event.target.value)
+  }
+  const createNewPassword = (event)=>{
+    setNewPassword(event.target.value)
   }
 
   //CREATE FUNCTION
@@ -122,6 +134,21 @@ const App = () =>{
     setEditWorkout(workout)
     
   }
+  const SignUpUser = (event) =>{
+    console.log('i started here')
+    axios 
+      .post('http://localhost:3000/user/new',
+      {
+        username: newUsername,
+        password: newPassword
+      })
+      .then(()=>{
+        console.log('came here')
+        getData() 
+      })
+      event.currentTarget.reset()
+      console.log('ended here!')
+  }
   return (
     <>
     <header>
@@ -160,10 +187,10 @@ const App = () =>{
           </div>
       </div>
       <details>
-        <form className="userForm">
-        Username: <input type="text"/>
-        Password: <input type="password"/><br/>
-        <input type="submit"/>
+        <form className="userForm" onSubmit={(event)=>{SignUpUser(event)}}>
+        Username: <input type="text" onChange={createNewUsername}/>
+        Password: <input type="password" onChange={createNewPassword}/><br/>
+        <input type="submit" value="SIGN IN"/>
         </form>
       </details>
       <EditModal
