@@ -3,9 +3,10 @@ import './App.css';
 import axios from 'axios'
 import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
+import InputComponent from './components/inputComponent'
 
 const App = () =>{
-
+// WORKOUTS STATES 
   const [newWorkoutDate, setNewWorkoutDate] = useState('')
   const [newWorkoutTime, setNewWorkoutTime] = useState('')
   const [newWorkoutArea, setNewWorkoutArea] = useState('')
@@ -16,8 +17,12 @@ const App = () =>{
   const [newMeal, setNewMeal] = useState([])
   const [newComment, setNewComments] = useState([])
   const [editWorkout, setEditWorkout] = useState({})
-  // const [Workout, setNewWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
+
+// USER STATES 
+
+  const [newUsername, setNewUsername] = useState('')
+  const [newPassword, setNewPassword] = useState('')
 
   //GET UPDATED DATA
   const getData = () => {
@@ -32,7 +37,7 @@ const App = () =>{
     getData();
   },[])
 
-
+// WORKOUTS
   const newDate = (event)=>{
     setNewWorkoutDate(event.target.value)
   }
@@ -59,6 +64,14 @@ const App = () =>{
   }
   const newWorkoutComment = (event)=>{
     setNewComments(event.target.value) 
+  }
+
+  //USER 
+  const createNewUsername = (event)=>{
+    setNewUsername(event.target.value)
+  }
+  const createNewPassword = (event)=>{
+    setNewPassword(event.target.value)
   }
 
   //CREATE FUNCTION
@@ -122,6 +135,19 @@ const App = () =>{
     setEditWorkout(workout)
     
   }
+  const SignUpUser = (event) =>{
+    event.preventDefault()
+    axios 
+      .post('http://localhost:3000/user/new',
+      {
+        username: newUsername,
+        password: newPassword
+      })
+      .then(()=>{
+        getData() 
+      })
+      event.currentTarget.reset()
+  }
   return (
     <>
     <header>
@@ -135,15 +161,15 @@ const App = () =>{
           <div className="workoutForm">
             <form onSubmit={(event)=>{formSubmit(event)}}>
               <h4>ADD WORKOUT</h4>
-              Date: <input type="text" onChange={newDate}/>
-              Time: <input type="text" onChange={newTime}/>
-              Target Area: <input type="text" onChange={newArea}/>
-              Exercise: <input type="text" onChange={newExercise}/>
-              Sets: <input type="number" onChange={newSets}/>
-              Reps: <input type="number" onChange={newReps}/>
-              Weight: <input type="text" onChange={newWeight}/>
-              Meal: <input type="text" onChange={newWorkoutMeal}/>
-              Comments: <input type="text" onChange={newWorkoutComment}/><br/>
+              DATE<input type="date" onChange={newDate}/>
+              TIME<input type="time" onChange={newTime}/>
+              TARGET AREA<InputComponent func={newArea}/>
+              EXERCISE<input type="text" onChange={newExercise}/>
+              SETS<input type="number" onChange={newSets}/>
+              REPS<input type="number" onChange={newReps}/>
+              WEIGHT<input type="text" onChange={newWeight}/>
+              MEAL<input type="text" onChange={newWorkoutMeal}/>
+              COMMENTS<input type="text" onChange={newWorkoutComment}/><br/>
               <input type="submit" value="submit"/>
             </form>
           </div>
@@ -160,10 +186,10 @@ const App = () =>{
           </div>
       </div>
       <details>
-        <form className="userForm">
-        Username: <input type="text"/>
-        Password: <input type="password"/><br/>
-        <input type="submit"/>
+        <form className="userForm" onSubmit={(event)=>{SignUpUser(event)}}>
+        Username: <input type="text" onChange={createNewUsername}/>
+        Password: <input type="password" onChange={createNewPassword}/><br/>
+        <input type="submit" value="SIGN IN"/>
         </form>
       </details>
       <EditModal
