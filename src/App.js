@@ -19,7 +19,7 @@ const App = () =>{
   // const [Workout, setNewWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
 
-
+  //GET UPDATED DATA
   const getData = () => {
     axios 
       .get('http://localhost:3000/workout')
@@ -27,7 +27,7 @@ const App = () =>{
         setWorkouts(response.data)
       })
   }
-
+// USE EFFECT
   useEffect(()=>{
     getData();
   },[])
@@ -82,7 +82,7 @@ const App = () =>{
       })
     event.currentTarget.reset()
   }
-  //UPDATE FUNCTION RUNING
+  //UPDATE FUNCTION 
   const editSubmit = (event, workoutData) =>{
     event.preventDefault()
     axios.put(`http://localhost:3000/workout/${workoutData._id}`,
