@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios'
 import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
+import InputComponent from './components/inputComponent'
 
 const App = () =>{
 // WORKOUTS STATES 
@@ -135,7 +136,7 @@ const App = () =>{
     
   }
   const SignUpUser = (event) =>{
-    console.log('i started here')
+    event.preventDefault()
     axios 
       .post('http://localhost:3000/user/new',
       {
@@ -143,11 +144,9 @@ const App = () =>{
         password: newPassword
       })
       .then(()=>{
-        console.log('came here')
         getData() 
       })
       event.currentTarget.reset()
-      console.log('ended here!')
   }
   return (
     <>
@@ -162,15 +161,15 @@ const App = () =>{
           <div className="workoutForm">
             <form onSubmit={(event)=>{formSubmit(event)}}>
               <h4>ADD WORKOUT</h4>
-              Date: <input type="text" onChange={newDate}/>
-              Time: <input type="text" onChange={newTime}/>
-              Target Area: <input type="text" onChange={newArea}/>
-              Exercise: <input type="text" onChange={newExercise}/>
-              Sets: <input type="number" onChange={newSets}/>
-              Reps: <input type="number" onChange={newReps}/>
-              Weight: <input type="text" onChange={newWeight}/>
-              Meal: <input type="text" onChange={newWorkoutMeal}/>
-              Comments: <input type="text" onChange={newWorkoutComment}/><br/>
+              DATE<input type="date" onChange={newDate}/>
+              TIME<input type="time" onChange={newTime}/>
+              TARGET AREA<InputComponent func={newArea}/>
+              EXERCISE<input type="text" onChange={newExercise}/>
+              SETS<input type="number" onChange={newSets}/>
+              REPS<input type="number" onChange={newReps}/>
+              WEIGHT<input type="text" onChange={newWeight}/>
+              MEAL<input type="text" onChange={newWorkoutMeal}/>
+              COMMENTS<input type="text" onChange={newWorkoutComment}/><br/>
               <input type="submit" value="submit"/>
             </form>
           </div>
