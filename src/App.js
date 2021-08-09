@@ -4,6 +4,7 @@ import axios from 'axios'
 import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
 import InputComponent from './components/inputComponent'
+import NavComponent from './components/navComponent'
 
 const App = () =>{
 // WORKOUTS STATES 
@@ -135,13 +136,28 @@ const App = () =>{
     setEditWorkout(workout)
     
   }
+  //SIGN UP FUNCTION
   const SignUpUser = (event) =>{
     event.preventDefault()
     axios 
       .post('http://localhost:3000/user/new',
       {
         username: newUsername,
-        password: newPassword
+        password: newPassword,
+      })
+      .then(()=>{
+        getData() 
+      })
+      event.currentTarget.reset()
+  }
+  //LOGIN FUNCTION
+  const userLogin = (event) =>{
+    event.preventDefault()
+    axios 
+      .post('http://localhost:3000/sessions',
+      {
+        username: newUsername,
+        password: newPassword,
       })
       .then(()=>{
         getData() 
@@ -150,29 +166,9 @@ const App = () =>{
   }
   return (
     <>
-    <header>
-      <div>
-        <h1><span>Dev</span>Muscles</h1>
-        <div className="nav icons">
-        </div>
-      </div> 
-    </header> 
-      <div className="container-master">
-          <div className="workoutForm">
-            <form onSubmit={(event)=>{formSubmit(event)}}>
-              <h4>ADD WORKOUT</h4>
-              DATE<input type="date" onChange={newDate}/>
-              TIME<input type="time" onChange={newTime}/>
-              TARGET AREA<InputComponent func={newArea}/>
-              EXERCISE<input type="text" onChange={newExercise}/>
-              SETS<input type="number" onChange={newSets}/>
-              REPS<input type="number" onChange={newReps}/>
-              WEIGHT<input type="text" onChange={newWeight}/>
-              MEAL<input type="text" onChange={newWorkoutMeal}/>
-              COMMENTS<input type="text" onChange={newWorkoutComment}/><br/>
-              <input type="submit" value="submit"/>
-            </form>
-          </div>
+    <div className="container-master">
+    <NavComponent/>
+      <div className="container">
           <div className="Workouts">
             {
               allWorkouts.map((workout) =>{
@@ -183,15 +179,47 @@ const App = () =>{
                 </>
               })
             }
+            <div className="">
+              <img className="shirtless-guy" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
+            </div>
           </div>
+          <div className="workoutForm">
+            <form onSubmit={(event)=>{formSubmit(event)}}>
+              <h4>ADD WORKOUT</h4>
+              <span className="form-title">DATE</span><input type="date" onChange={newDate}/>
+              <span className="form-title">TIME</span><input type="time" onChange={newTime}/>
+              <span className="form-title">TARGET AREA</span><InputComponent func={newArea}/>
+              <span className="form-title">EXERCISE</span><input type="text" onChange={newExercise}/>
+              <span className="form-title">SETS</span><input type="number" onChange={newSets}/>
+              <span className="form-title">REPS</span><input type="number" onChange={newReps}/>
+              <span className="form-title">WEIGHT</span><input type="text" onChange={newWeight}/>
+              <span className="form-title">MEAL</span><input type="text" onChange={newWorkoutMeal}/>
+              <span className="form-title">COMMENTS</span><input type="text" onChange={newWorkoutComment}/><br/>
+              <input type="submit" value="submit"/>
+            </form>
+          </div>
+        </div>
       </div>
-      <details>
+      {/* <details>
         <form className="userForm" onSubmit={(event)=>{SignUpUser(event)}}>
         Username: <input type="text" onChange={createNewUsername}/>
         Password: <input type="password" onChange={createNewPassword}/><br/>
-        <input type="submit" value="SIGN IN"/>
+        <input type="submit" value="SIGN UP"/>
         </form>
-      </details>
+      </details> */}
+      {/* <details>
+        <form className="userForm" onSubmit={(event)=>{userLogin(event)}}>
+        Username: <input type="text" onChange={createNewUsername}/>
+        Password: <input type="password" onChange={createNewPassword}/><br/>
+        <input type="submit" value="LOG IN"/>
+        </form>
+        <div>
+        <div className="nav icons">
+          <a>SIGN IN</a>
+          <a>JOIN US</a>
+        </div>
+      </div> 
+      </details> */}
       <EditModal
       setEditWorkout={setEditWorkout}
       editWorkout={editWorkout}

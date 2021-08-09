@@ -13,16 +13,16 @@ const EditModal = (props) =>{
             <div className="editWorkoutForm">
                 <form onSubmit={(event)=>{props.editSubmit(event, props.editWorkout)}}>
                 <p className="close-modal" onClick={closeEditModal}>x</p>
-                    <h4>EDIT {props.editWorkout.date} WORKOUT</h4>
-                    Date: <input type="text" onChange={props.newDate}/>
-                    Time: <input type="text" onChange={props.newTime}/>
-                    Target Area: <input type="text" onChange={props.newArea}/>
-                    Exercise: <input type="text" onChange={props.newExercise}/>
-                    Sets: <input type="number" onChange={props.newSets}/>
-                    Reps: <input type="number" onChange={props.newReps}/>
-                    Weight: <input type="text" onChange={props.newWeight}/>
-                    Meal: <input type="text" onChange={props.newWorkoutMeal}/>
-                    Comments: <input type="text" onChange={props.newWorkoutComment}/><br/>
+                    <h4>EDIT {props.editWorkout.exercise}</h4>
+                    Date<input type="text" onChange={props.newDate} value={props.editWorkout.date}/>
+                    Time<input type="text" onChange={props.newTime} value={props.editWorkout.time}/>
+                    Target Area<input type="text" onChange={props.newArea} value={props.editWorkout.target}/>
+                    Exercise<input type="text" onChange={props.newExercise} value={props.editWorkout.exercise}/>
+                    Sets<input type="number" onChange={props.newSets} value={props.editWorkout.sets}/>
+                    Reps<input type="number" onChange={props.newReps} value={props.editWorkout.reps}/>
+                    Weight<input type="text" onChange={props.newWeight} value={props.editWorkout.weight}/>
+                    Meal<input type="text" onChange={props.newWorkoutMeal} value={props.editWorkout.meal}/>
+                    Comments<input type="text" onChange={props.newWorkoutComment} value={props.editWorkout.comments}/><br/>
                     <input type="submit" value="submit"/>
                 </form>
             </div>
