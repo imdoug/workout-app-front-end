@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Nav = () =>{
+const Nav = (props) =>{
     return(
         <>
         <section>
@@ -13,7 +13,7 @@ const Nav = () =>{
                     <img src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"/>
                 </div>
                 <p className="welcome">Welcome</p>
-                <p className="username">"your name"</p>
+                {props.user ? <p className="username">{props.user.user.username}</p> : <p className="username">"your name"</p>}
                 <span>Profille picture</span>
                 <input type="url" placeholder="image link"/>
                 <span></span>Weight

@@ -25,14 +25,28 @@ const App = () =>{
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
 
+// USER LOGIN
+
+  const [currentUser, setCurrentUser] = useState('')
+
   //GET UPDATED DATA
   const getData = () => {
     axios 
       .get('http://localhost:3000/workout')
       .then((response)=>{
         setWorkouts(response.data)
+        // console.log(response.data)
       })
   }
+  // //GET USER DATA
+  // const getUser = () => {
+  //   axios 
+  //     .get('http://localhost:3000/user/')
+  //     .then((response)=>{
+  //       setCurrentUser(response.data)
+  //       console.log(response.data)
+  //     })
+  // }
 // USE EFFECT
   useEffect(()=>{
     getData();
@@ -154,12 +168,15 @@ const App = () =>{
   const userLogin = (event) =>{
     event.preventDefault()
     axios 
-      .post('http://localhost:3000/sessions',
+      .post('http://localhost:3000/user/login',
       {
         username: newUsername,
         password: newPassword,
       })
-      .then(()=>{
+      .then((response)=>{
+        setCurrentUser(response.data)
+        console.log(response.data)
+        // getUser() 
         getData() 
       })
       event.currentTarget.reset()
@@ -167,7 +184,7 @@ const App = () =>{
   return (
     <>
     <div className="container-master">
-    <NavComponent/>
+    <NavComponent user={currentUser}/>
       <div className="container">
           <div className="Workouts">
             {
@@ -207,19 +224,19 @@ const App = () =>{
         <input type="submit" value="SIGN UP"/>
         </form>
       </details> */}
-      {/* <details>
+      <details>
         <form className="userForm" onSubmit={(event)=>{userLogin(event)}}>
         Username: <input type="text" onChange={createNewUsername}/>
         Password: <input type="password" onChange={createNewPassword}/><br/>
         <input type="submit" value="LOG IN"/>
         </form>
         <div>
-        <div className="nav icons">
+        {/* <div className="nav icons">
           <a>SIGN IN</a>
           <a>JOIN US</a>
-        </div>
+        </div> */}
       </div> 
-      </details> */}
+      </details>
       <EditModal
       setEditWorkout={setEditWorkout}
       editWorkout={editWorkout}
