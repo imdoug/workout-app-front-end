@@ -180,7 +180,7 @@ const App = () =>{
               })
             }
             <div className="">
-              <img className="shirtless-guy" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
+              <img className="bottom-pic" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             </div>
           </div>
           <div className="workoutForm">

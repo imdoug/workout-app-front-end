@@ -8,12 +8,16 @@ const WorkoutComponent = (props) =>{
     return(
         <>
         <div className="workout-item">
-            <div>
-            <p className="date">{props.work.date}</p>
-            <p className="time">{props.work.time}</p>
+            <div className="displayed-info">
+                <p className="date">{props.work.date}</p>
+                <p className="time">{props.work.time}</p>
             </div>
-            <h3>{props.work.target}</h3>
-            <p className="exercise">{props.work.exercise}</p>
+            <div className="displayed-info">
+                <h3>{props.work.target}</h3>
+            </div>
+            <div className="displayed-info">
+                <p className="exercise">{props.work.exercise}</p>
+            </div>
             <div className="buttons">
                 <button id="edit-btn"type="button" onClick={()=>{props.openModal(props.work)}}>EDIT</button><br/>
                 <button id="del-btn"type="button" onClick={()=>{props.delete(props.work)}}>DELETE</button>

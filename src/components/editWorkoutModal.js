@@ -12,17 +12,17 @@ const EditModal = (props) =>{
         <div className="edit-modal hidden">
             <div className="editWorkoutForm">
                 <form onSubmit={(event)=>{props.editSubmit(event, props.editWorkout)}}>
-                <p className="close-modal" onClick={closeEditModal}>x</p>
+                <p className="close-modal" onClick={closeEditModal}><i class="fa fa-times-circle"></i></p>
                     <h4>EDIT {props.editWorkout.exercise}</h4>
-                    Date<input type="text" onChange={props.newDate} value={props.editWorkout.date}/>
-                    Time<input type="text" onChange={props.newTime} value={props.editWorkout.time}/>
-                    Target Area<input type="text" onChange={props.newArea} value={props.editWorkout.target}/>
-                    Exercise<input type="text" onChange={props.newExercise} value={props.editWorkout.exercise}/>
-                    Sets<input type="number" onChange={props.newSets} value={props.editWorkout.sets}/>
-                    Reps<input type="number" onChange={props.newReps} value={props.editWorkout.reps}/>
-                    Weight<input type="text" onChange={props.newWeight} value={props.editWorkout.weight}/>
-                    Meal<input type="text" onChange={props.newWorkoutMeal} value={props.editWorkout.meal}/>
-                    Comments<input type="text" onChange={props.newWorkoutComment} value={props.editWorkout.comments}/><br/>
+                    Date<input type="text" onChange={props.newDate} placeholder={props.editWorkout.date}/>
+                    Time<input type="text" onChange={props.newTime} placeholder={props.editWorkout.time}/>
+                    Target Area<input type="text" onChange={props.newArea} placeholder={props.editWorkout.target}/>
+                    Exercise<input type="text" onChange={props.newExercise} placeholder={props.editWorkout.exercise}/>
+                    Sets<input type="number" onChange={props.newSets} placeholder={props.editWorkout.sets}/>
+                    Reps<input type="number" onChange={props.newReps} placeholder={props.editWorkout.reps}/>
+                    Weight<input type="text" onChange={props.newWeight} placeholder={props.editWorkout.weight}/>
+                    Meal<input type="text" onChange={props.newWorkoutMeal} placeholder={props.editWorkout.meal}/>
+                    Comments<input type="text" onChange={props.newWorkoutComment} placeholder={props.editWorkout.comments}/><br/>
                     <input type="submit" value="submit"/>
                 </form>
             </div>
