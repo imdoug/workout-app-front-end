@@ -15,8 +15,8 @@ const App = () =>{
   const [newWorkoutReps, setNewWorkoutReps] = useState(0)
   const [newWorkoutSets, setNewWorkoutSets] = useState(0)
   const [newWorkoutWeight, setNewWorkoutWeight] = useState('')
-  const [newMeal, setNewMeal] = useState([])
-  const [newComment, setNewComments] = useState([])
+  const [newMeal, setNewMeal] = useState('')
+  const [newComment, setNewComments] = useState()
   const [editWorkout, setEditWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
 
@@ -67,13 +67,13 @@ const App = () =>{
     setNwWorkoutExercise(event.target.value)
   }
   const newReps = (event)=>{
-    setNewWorkoutReps(event.target.value) 
+    setNewWorkoutReps(Number(event.target.value)) 
   }
   const newSets = (event)=>{
-    setNewWorkoutSets(event.target.value)
+    setNewWorkoutSets(Number(event.target.value))
   }
   const newWeight = (event)=>{
-    setNewWorkoutWeight(event.target.value) 
+    setNewWorkoutWeight(Number(event.target.value)) 
   }
   const newWorkoutMeal = (event)=>{
     setNewMeal(event.target.value) 
@@ -90,27 +90,27 @@ const App = () =>{
     setNewPassword(event.target.value)
   }
 
-  //CREATE FUNCTION
-  const formSubmit = (event) =>{
-    event.preventDefault()
-    console.log("im working!");
-    axios.post('http://localhost:3000/workout/new',
-      {
-        date: newWorkoutDate,
-        time: newWorkoutTime,
-        target : newWorkoutArea,
-        exercise : newWorkoutExercise,
-        sets: newWorkoutSets,
-        reps : newWorkoutReps,
-        weight : newWorkoutWeight,
-        meal: newMeal,
-        comments: newComment,
-      }
-      ).then(()=>{
-        getData();
-      })
-    event.currentTarget.reset()
-  }
+  // //CREATE FUNCTION (NOT ACTIVE)
+  // const formSubmit = (event) =>{
+  //   event.preventDefault()
+  //   console.log("im working!");
+  //   axios.post('http://localhost:3000/workout/new',
+  //     {
+  //       date: newWorkoutDate,
+  //       time: newWorkoutTime,
+  //       target : newWorkoutArea,
+  //       exercise : newWorkoutExercise,
+  //       sets: newWorkoutSets,
+  //       reps : newWorkoutReps,
+  //       weight : newWorkoutWeight,
+  //       meal: newMeal,
+  //       comments: newComment,
+  //     }
+  //     ).then(()=>{
+  //       getData();
+  //     })
+  //   event.currentTarget.reset()
+  // }
   //UPDATE FUNCTION 
   const editSubmit = (event, workoutData) =>{
     event.preventDefault()
@@ -136,15 +136,16 @@ const App = () =>{
 
   }
 
-  //DELETE FUNCTION
-  const deleteWorkout = (workoutData) =>{
-    console.log(workoutData)
-    axios
-      .delete(`http://localhost:3000/workout/${workoutData._id}`)
-      .then(()=>{
-        getData()
-      })
-  }
+  // //DELETE FUNCTION (NOT ACTIVE)
+  // const deleteWorkout = (workoutData) =>{
+  //   console.log(workoutData)
+  //   axios
+  //     .delete(`http://localhost:3000/workout/${workoutData._id}`)
+  //     .then((respnse)=>{
+
+  //       getData()
+  //     })
+  // }
   // EDIT MODAL OPENER FUNCTION
   const openEditModal = (workout) => {
     document.querySelector('.edit-modal').classList.toggle('hidden')
@@ -190,13 +191,55 @@ const App = () =>{
   const logoutUser = (user) =>{
     console.log(user.token)
     setCurrentUser()
+    // axios
+    //   .delete(`http://localhost:3000/user/delete`, 
+    //   {
+    //     token: user.token,
+    //     user: {
+    //       id: user.user.id,
+    //       username: user.user.username,
+    //       workoutscompleted: user.user.workoutscompleted,
+
+    //     }
+
+    //   })
+    //   .then((response)=>{
+    //     setCurrentUser()
+    //     console.log(response.data)
+    //     getData()
+    //   })
+  }
+  //ADD TO WORKOUT ARRAY
+  const addNewWorkout = (event) =>{
+    event.preventDefault()
+    console.log()
     axios
-      .post(`http://localhost:3000/user/tokenIsValid`, user)
-      .then((response)=>{
-        setCurrentUser()
+      .post(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
+      {
+        date: newWorkoutDate,
+        time: newWorkoutTime,
+        target : newWorkoutArea,
+        exercise : newWorkoutExercise,
+        sets: newWorkoutSets,
+        reps : newWorkoutReps,
+        weight : newWorkoutWeight,
+        meal: newMeal,
+        comments: newComment,
+      } ).then((response)=>{
         console.log(response.data)
+        setCurrentUser(response.data)
         getData()
       })
+  }
+  const removeWorkout = (workoutData) =>{
+    console.log(workoutData)
+    // axios
+    //   .post(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
+    //   ).then((response)=>{
+    //     console.log(response.data)
+    //     setCurrentUser(response.data)
+    //     getData()
+    //   })
   }
   return (
     <>
@@ -213,10 +256,10 @@ const App = () =>{
           <div className="Workouts">
             {}
             {
-              currentUser.user.workoutscompleted.map((workout) =>{
+              currentUser.user.workouts.map((workout) =>{
                 return <>
                   <WorkoutComponent work={workout}
-                  delete={deleteWorkout}
+                  delete={removeWorkout}
                   openModal={openEditModal}/>
                 </>
               })
@@ -226,7 +269,9 @@ const App = () =>{
             </div>
           </div>
           <div className="workoutForm">
-            <form onSubmit={(event)=>{formSubmit(event)}}>
+            <form onSubmit={addNewWorkout}>
+              {/* onSubmit */}
+            {/* (event)=>{formSubmit(event)} */}
               <h4>ADD WORKOUT</h4>
               <span className="form-title">DATE</span><input type="date" onChange={newDate}/>
               <span className="form-title">TIME</span><input type="time" onChange={newTime}/>

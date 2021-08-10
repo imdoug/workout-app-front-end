@@ -23,13 +23,7 @@ const WorkoutComponent = (props) =>{
                 <button id="del-btn"type="button" onClick={()=>{props.delete(props.work)}}>DELETE</button>
             </div>
             <div className="comments hidden">
-                {props.work.comments.map((coments)=>{
-                    return(
-                        <>
-                        <p>Comments: <span>"{coments}"</span></p>
-                        </>
-                    )
-                })}
+                <p>Comments: <span>"{props.work.comments}"</span></p>
             </div>
         </div>
         </>
