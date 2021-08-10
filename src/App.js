@@ -27,7 +27,7 @@ const App = () =>{
 
 // USER LOGIN
 
-  const [currentUser, setCurrentUser] = useState('')
+  const [currentUser, setCurrentUser] = useState()
 
   //GET UPDATED DATA
   const getData = () => {
@@ -50,6 +50,7 @@ const App = () =>{
 // USE EFFECT
   useEffect(()=>{
     getData();
+    console.log(currentUser)
   },[])
 
 // WORKOUTS
@@ -154,12 +155,14 @@ const App = () =>{
   const SignUpUser = (event) =>{
     event.preventDefault()
     axios 
-      .post('http://localhost:3000/user/new',
+      .post('http://localhost:3000/user/register',
       {
         username: newUsername,
         password: newPassword,
       })
-      .then(()=>{
+      .then((response)=>{
+        setCurrentUser(response.data)
+        console.log(response.data)
         getData() 
       })
       event.currentTarget.reset()
@@ -176,26 +179,48 @@ const App = () =>{
       .then((response)=>{
         setCurrentUser(response.data)
         console.log(response.data)
+        console.log(response.data.user.workoutscompleted)
+        console.log(response.data.token)
         // getUser() 
         getData() 
       })
       event.currentTarget.reset()
   }
+  // LOG OUT 
+  const logoutUser = (user) =>{
+    console.log(user.token)
+    setCurrentUser()
+    axios
+      .post(`http://localhost:3000/user/tokenIsValid`, user)
+      .then((response)=>{
+        setCurrentUser()
+        console.log(response.data)
+        getData()
+      })
+  }
   return (
     <>
     <div className="container-master">
-    <NavComponent user={currentUser}/>
+    <NavComponent user={currentUser}
+    createNewUsername={createNewUsername}
+    createNewPassword={createNewPassword}
+    userLogin={userLogin}
+    SignUpUser={SignUpUser}
+    logout={logoutUser}/>
       <div className="container">
+      {currentUser ?
+          <>
           <div className="Workouts">
+            {}
             {
-              allWorkouts.map((workout) =>{
+              currentUser.user.workoutscompleted.map((workout) =>{
                 return <>
                   <WorkoutComponent work={workout}
                   delete={deleteWorkout}
                   openModal={openEditModal}/>
                 </>
               })
-            }
+            } 
             <div className="">
               <img className="bottom-pic" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             </div>
@@ -215,28 +240,14 @@ const App = () =>{
               <input type="submit" value="submit"/>
             </form>
           </div>
+          </> 
+          : <div className="index">
+            <div>
+            <h1 className="index-logo"><span>Dev</span>Muscles</h1>
+            </div>
+            </div>}
         </div>
       </div>
-      {/* <details>
-        <form className="userForm" onSubmit={(event)=>{SignUpUser(event)}}>
-        Username: <input type="text" onChange={createNewUsername}/>
-        Password: <input type="password" onChange={createNewPassword}/><br/>
-        <input type="submit" value="SIGN UP"/>
-        </form>
-      </details> */}
-      <details>
-        <form className="userForm" onSubmit={(event)=>{userLogin(event)}}>
-        Username: <input type="text" onChange={createNewUsername}/>
-        Password: <input type="password" onChange={createNewPassword}/><br/>
-        <input type="submit" value="LOG IN"/>
-        </form>
-        <div>
-        {/* <div className="nav icons">
-          <a>SIGN IN</a>
-          <a>JOIN US</a>
-        </div> */}
-      </div> 
-      </details>
       <EditModal
       setEditWorkout={setEditWorkout}
       editWorkout={editWorkout}
