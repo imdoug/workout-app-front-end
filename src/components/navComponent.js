@@ -4,7 +4,7 @@ const Nav = (props) =>{
     return(
         <>
         <section>
-        <h1><span>Dev</span>Muscles</h1>
+        {props.user && <h1><span>Dev</span>Muscles</h1>}
             <div className="ex-image">
                 {props.user ? 
                 <img className="header-img" src="https://i.ibb.co/SJbZZn6/logo-img.png"/>

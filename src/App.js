@@ -246,10 +246,6 @@ const App = () =>{
       })
       event.currentTarget.reset()
       document.querySelector('.profile-modal').classList.toggle('hidden')
-      setProfileImage("")
-      setUserWeight("")
-      setUserHeight("")
-
   }
   return (
     <>
