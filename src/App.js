@@ -117,14 +117,16 @@ const App = () =>{
   //SIGN UP FUNCTION
   const SignUpUser = (event) =>{
     event.preventDefault()
+    document.querySelector('details').removeAttribute('open')
     axios 
       .post('https://secure-plateau-25521.herokuapp.com/user/register',
       {
         username: newUsername,
         password: newPassword,
       })
-      .then((response)=>{
-        setCurrentUser(response.data)
+      .then(()=>{ //response
+        // setCurrentUser(response.data)
+        // console.log(response.data)
         getData() 
       })
       event.currentTarget.reset()
@@ -140,7 +142,6 @@ const App = () =>{
       })
       .then((response)=>{
         setCurrentUser(response.data)
-        console.log(response.data.token)
         getData() 
       })
       event.currentTarget.reset()
@@ -170,7 +171,8 @@ const App = () =>{
   //ADD TO WORKOUT ARRAY
   const addNewWorkout = (event) =>{
     event.preventDefault()
-    console.log()
+    console.log('im coming here')
+    console.log(currentUser)
     axios
       .post(`https://secure-plateau-25521.herokuapp.com/user/${currentUser.user.id}/${currentUser.token}`,
       {
@@ -184,6 +186,7 @@ const App = () =>{
         meal: newMeal,
         comments: newComment,
       } ).then((response)=>{
+        console.log(response.data)
         setCurrentUser(response.data)
         setIndex(0)
         getData()
