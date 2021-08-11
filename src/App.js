@@ -182,7 +182,7 @@ const App = () =>{
   const SignUpUser = (event) =>{
     event.preventDefault()
     axios 
-      .post('http://localhost:3000/user/register',
+      .post('https://secure-plateau-25521.herokuapp.com/user/register',
       {
         username: newUsername,
         password: newPassword,
@@ -197,7 +197,7 @@ const App = () =>{
   const userLogin = (event) =>{
     event.preventDefault()
     axios 
-      .post('http://localhost:3000/user/login',
+      .post('https://secure-plateau-25521.herokuapp.com/user/login',
       {
         username: newUsername,
         password: newPassword,
@@ -236,7 +236,7 @@ const App = () =>{
     event.preventDefault()
     console.log()
     axios
-      .post(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
+      .post(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}`,
       {
         date: newWorkoutDate,
         time: newWorkoutTime,
@@ -258,7 +258,7 @@ const App = () =>{
   const removeWorkout = (workoutData, index) =>{
     console.log(workoutData, index)
     axios
-      .delete(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`
+      .delete(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}/${index}`
       ).then((response)=>{
         console.log(response.data)
         setCurrentUser(response.data)
@@ -270,7 +270,7 @@ const App = () =>{
     event.preventDefault()
     console.log(workoutData)
     axios
-      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`, 
+      .put(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}/${index}`, 
       {
         date: newWorkoutDate || workoutData.date,
         time: newWorkoutTime|| workoutData.time,
@@ -296,7 +296,7 @@ const App = () =>{
     console.log('made it to the function')
     event.preventDefault()
     axios
-      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
+      .put(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}`,
       {
         // profileHeight profileWeight profileImage
         height: profileHeight || currentUser.user.height,
