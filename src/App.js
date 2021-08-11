@@ -5,6 +5,7 @@ import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
 import InputComponent from './components/inputComponent'
 import NavComponent from './components/navComponent'
+import EditProfile from './components/editProfile';
 
 const App = () =>{
 // WORKOUTS STATES 
@@ -28,7 +29,6 @@ const App = () =>{
   const [profileImage, setProfileImage] = useState('')
   const [profileWeight, setUserWeight] = useState('')
   const [profileHeight, setUserHeight] = useState('')
-
 // USER LOGIN
 
   const [currentUser, setCurrentUser] = useState()
@@ -95,6 +95,17 @@ const App = () =>{
     setNewPassword(event.target.value)
   }
 
+  // PROFILE 
+  const getProfileImage = (event)=>{
+    setProfileImage(event.target.value)
+  }
+  const getProfileHeight = (event)=>{
+    setUserHeight(event.target.value)
+  }
+  const getProfileWeight = (event)=>{
+    setUserWeight(event.target.value)
+  }
+
   // //CREATE FUNCTION (NOT ACTIVE)
   // const formSubmit = (event) =>{
   //   event.preventDefault()
@@ -158,6 +169,15 @@ const App = () =>{
     setIndex(index)
     
   }
+  // EDIT PROFILE MODAL OPENER
+  const openEditModalProfile = () => {
+    document.querySelector('.profile-modal').classList.toggle('hidden')
+  }
+  // SHOW EXTRA INFO 
+  const showExtraInfo = () => {
+    document.querySelector('.extra-info').classList.toggle('hidden')
+  }
+
   //SIGN UP FUNCTION
   const SignUpUser = (event) =>{
     event.preventDefault()
@@ -169,7 +189,6 @@ const App = () =>{
       })
       .then((response)=>{
         setCurrentUser(response.data)
-        console.log(response.data)
         getData() 
       })
       event.currentTarget.reset()
@@ -185,9 +204,7 @@ const App = () =>{
       })
       .then((response)=>{
         setCurrentUser(response.data)
-        console.log(response.data)
         console.log(response.data.token)
-        // getUser() 
         getData() 
       })
       event.currentTarget.reset()
@@ -235,7 +252,7 @@ const App = () =>{
         setIndex(0)
         getData()
       })
-      event.currentTarget.reset()
+      event.currentTarget.reset( )
   }
   //REMOVE TO WORKOUT ARRAY 
   const removeWorkout = (workoutData, index) =>{
@@ -275,6 +292,29 @@ const App = () =>{
       setIndex(0)
       document.querySelector('.edit-modal').classList.toggle('hidden')
   }
+  const editProfileSubmit = (event) => {
+    console.log('made it to the function')
+    event.preventDefault()
+    axios
+      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
+      {
+        // profileHeight profileWeight profileImage
+        height: profileHeight || currentUser.user.height,
+        weight: profileWeight || currentUser.user.weight,
+        image: profileImage || currentUser.user.image
+      })
+      .then((response)=>{
+        console.log(response.data)
+        setCurrentUser(response.data)
+        getData()
+      })
+      event.currentTarget.reset()
+      document.querySelector('.profile-modal').classList.toggle('hidden')
+      setProfileImage("")
+      setUserWeight("")
+      setUserHeight("")
+
+  }
   return (
     <>
     <div className="container-master">
@@ -283,7 +323,9 @@ const App = () =>{
     createNewPassword={createNewPassword}
     userLogin={userLogin}
     SignUpUser={SignUpUser}
-    logout={logoutUser}/>
+    logout={logoutUser}
+    EditModalProfile={openEditModalProfile}
+    />
       <div className="container">
       {currentUser ?
           <>
@@ -296,7 +338,8 @@ const App = () =>{
                   <WorkoutComponent work={workout}
                   index={index}
                   delete={removeWorkout}
-                  openModal={openEditModal}/>
+                  openModal={openEditModal}
+                  showInfo={showExtraInfo}/>
                 </>
               })
             }
@@ -307,8 +350,6 @@ const App = () =>{
           </div>
           <div className="workoutForm">
             <form onSubmit={addNewWorkout}>
-              {/* onSubmit */}
-            {/* (event)=>{formSubmit(event)} */}
               <h4>ADD WORKOUT</h4>
               <span className="form-title">DATE</span><input type="date" onChange={newDate}/>
               <span className="form-title">TIME</span><input type="time" onChange={newTime}/>
@@ -327,9 +368,18 @@ const App = () =>{
             <div>
             <h1 className="index-logo"><span>Dev</span>Muscles</h1>
             </div>
-            </div>}
+            </div>
+            }
         </div>
       </div>
+      <EditProfile user={currentUser}
+      ProfileImage={getProfileImage}
+      ProfileHeight={getProfileHeight}
+      ProfileWeight={getProfileWeight}
+      ProfileSubmit={editProfileSubmit}
+      setWeight={setUserWeight}
+      setHeight={setUserHeight}
+      setImage={setProfileImage}/>
       <EditModal
       setEditWorkout={setEditWorkout}
       editWorkout={editWorkout}

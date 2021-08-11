@@ -12,6 +12,7 @@ const Nav = (props) =>{
             </div>
             {props.user ?
             <>
+            {console.log(props.user)}
                 <div className="pic-div">
                     {props.user.user.image === "" ? <img className="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"/>  : <img className="profile-pic" src={props.user.user.image}/>}
                 </div>
@@ -19,7 +20,7 @@ const Nav = (props) =>{
                 <p className="username">{props.user.user.username}</p>
                 <p className="height">HEIGHT: {props.user.user.height}ft</p>
                 <p className="weight">WEIGHT: {props.user.user.weight}pounds</p>
-                <button className="edit-profile">EDIT PROFILE</button><br/>
+                <button className="edit-profile" onClick={props.EditModalProfile}>EDIT PROFILE</button><br/>
                 <button className="logout" onClick={props.logout}>LOGOUT</button>
             </>
             :

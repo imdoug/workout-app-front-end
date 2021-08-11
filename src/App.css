@@ -124,6 +124,25 @@ select{
   color: #eee;
   background: #232227;
 }
+.extra-info{
+  margin: 0 auto;
+  text-transform: uppercase;
+  display: flexbox;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 95%;
+  /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2); */
+  padding: 2%;
+  border-radius: 10px;
+  height: 80px;
+  margin-bottom: 1%;
+  color: #eee;
+  background: #232227;
+}
+.container-cards-master{
+  background: #232227;
+}
 h3{
   margin: 0;
   font-family: 'Anton', sans-serif;
@@ -253,6 +272,42 @@ details{
   padding: 20px;
   margin-bottom: 4%;
 }
+/* profile modal */
+.profile-modal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background: rgba(0,0,0,0.8)
+}
+.editProfileForm{
+  padding: 20px;
+  width: 20%;
+  display:flex;
+  justify-content: center;
+  background: #232227;
+  color: #eee;
+  border-radius: 5px;
+}
+.editProfileForm form{
+  width: 90%;
+}
+.editProfileForm input[type="submit"]{
+  width: 50%;
+  margin: 20px 25%;
+}
+#close-profile-modal{
+  padding: 0px 0px 10px 0px;
+  font-size: 1.2em;
+}
+/* .editProfileForm input{
+  width: 50%;
+  margin: 20px 25%;
+} */
 /* Section -- side nav */
 section{
   border-right: 1px solid #555;
