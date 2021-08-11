@@ -5,6 +5,7 @@ import WorkoutComponent from './components/workoutCard'
 import EditModal from './components/editWorkoutModal';
 import InputComponent from './components/inputComponent'
 import NavComponent from './components/navComponent'
+import EditProfile from './components/editProfile';
 
 const App = () =>{
 // WORKOUTS STATES 
@@ -15,8 +16,8 @@ const App = () =>{
   const [newWorkoutReps, setNewWorkoutReps] = useState(0)
   const [newWorkoutSets, setNewWorkoutSets] = useState(0)
   const [newWorkoutWeight, setNewWorkoutWeight] = useState('')
-  const [newMeal, setNewMeal] = useState([])
-  const [newComment, setNewComments] = useState([])
+  const [newMeal, setNewMeal] = useState('')
+  const [newComment, setNewComments] = useState()
   const [editWorkout, setEditWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
 
@@ -24,6 +25,15 @@ const App = () =>{
 
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  // USER PROFILE 
+  const [profileImage, setProfileImage] = useState('')
+  const [profileWeight, setUserWeight] = useState('')
+  const [profileHeight, setUserHeight] = useState('')
+// USER LOGIN
+
+  const [currentUser, setCurrentUser] = useState()
+// INDEX
+  const [index, setIndex] = useState(0)
 
   //GET UPDATED DATA
   const getData = () => {
@@ -31,8 +41,18 @@ const App = () =>{
       .get('http://localhost:3000/workout')
       .then((response)=>{
         setWorkouts(response.data)
+        // console.log(response.data)
       })
   }
+  // //GET USER DATA
+  // const getUser = () => {
+  //   axios 
+  //     .get('http://localhost:3000/user/')
+  //     .then((response)=>{
+  //       setCurrentUser(response.data)
+  //       console.log(response.data)
+  //     })
+  // }
 // USE EFFECT
   useEffect(()=>{
     getData();
@@ -52,13 +72,13 @@ const App = () =>{
     setNwWorkoutExercise(event.target.value)
   }
   const newReps = (event)=>{
-    setNewWorkoutReps(event.target.value) 
+    setNewWorkoutReps(Number(event.target.value)) 
   }
   const newSets = (event)=>{
-    setNewWorkoutSets(event.target.value)
+    setNewWorkoutSets(Number(event.target.value))
   }
   const newWeight = (event)=>{
-    setNewWorkoutWeight(event.target.value) 
+    setNewWorkoutWeight(Number(event.target.value)) 
   }
   const newWorkoutMeal = (event)=>{
     setNewMeal(event.target.value) 
@@ -75,11 +95,148 @@ const App = () =>{
     setNewPassword(event.target.value)
   }
 
-  //CREATE FUNCTION
-  const formSubmit = (event) =>{
+  // PROFILE 
+  const getProfileImage = (event)=>{
+    setProfileImage(event.target.value)
+  }
+  const getProfileHeight = (event)=>{
+    setUserHeight(event.target.value)
+  }
+  const getProfileWeight = (event)=>{
+    setUserWeight(event.target.value)
+  }
+
+  // //CREATE FUNCTION (NOT ACTIVE)
+  // const formSubmit = (event) =>{
+  //   event.preventDefault()
+  //   console.log("im working!");
+  //   axios.post('http://localhost:3000/workout/new',
+  //     {
+  //       date: newWorkoutDate,
+  //       time: newWorkoutTime,
+  //       target : newWorkoutArea,
+  //       exercise : newWorkoutExercise,
+  //       sets: newWorkoutSets,
+  //       reps : newWorkoutReps,
+  //       weight : newWorkoutWeight,
+  //       meal: newMeal,
+  //       comments: newComment,
+  //     }
+  //     ).then(()=>{
+  //       getData();
+  //     })
+  //   event.currentTarget.reset()
+  // }
+  //UPDATE FUNCTION (NOT ACTIVE)
+  // const editSubmit = (event, workoutData) =>{
+  //   event.preventDefault()
+  //   axios.put(`http://localhost:3000/workout/${workoutData._id}`,
+  //   {
+  //     date: newWorkoutDate || workoutData.date,
+  //     time: newWorkoutTime|| workoutData.time,
+  //     target : newWorkoutArea|| workoutData.target,
+  //     exercise : newWorkoutExercise || workoutData.exercise,
+  //     sets: newWorkoutSets || workoutData.sets,
+  //     reps : newWorkoutReps || workoutData.reps, 
+  //     weight : newWorkoutWeight || workoutData.weight,
+  //     meal: newMeal || workoutData.meal,
+  //     comments: newComment ||workoutData.comments,
+  //   }
+  //   ).then(()=>{
+  //     getData()
+          
+  //   })
+  //   event.currentTarget.reset()
+  //   setEditWorkout({})
+  //   document.querySelector('.edit-modal').classList.toggle('hidden')
+
+  // }
+
+  // //DELETE FUNCTION (NOT ACTIVE)
+  // const deleteWorkout = (workoutData) =>{
+  //   console.log(workoutData)
+  //   axios
+  //     .delete(`http://localhost:3000/workout/${workoutData._id}`)
+  //     .then((respnse)=>{
+
+  //       getData()
+  //     })
+  // }
+  // EDIT MODAL OPENER FUNCTION
+  const openEditModal = (workout, index) => {
+    document.querySelector('.edit-modal').classList.toggle('hidden')
+    setEditWorkout(workout)
+    setIndex(index)
+    
+  }
+  // EDIT PROFILE MODAL OPENER
+  const openEditModalProfile = () => {
+    document.querySelector('.profile-modal').classList.toggle('hidden')
+  }
+  // SHOW EXTRA INFO 
+  const showExtraInfo = (event, index) => {
+    document.querySelector(`#div${index}`).classList.toggle('hidden')
+  }
+
+  //SIGN UP FUNCTION
+  const SignUpUser = (event) =>{
     event.preventDefault()
-    console.log("im working!");
-    axios.post('http://localhost:3000/workout/new',
+    axios 
+      .post('http://localhost:3000/user/register',
+      {
+        username: newUsername,
+        password: newPassword,
+      })
+      .then((response)=>{
+        setCurrentUser(response.data)
+        getData() 
+      })
+      event.currentTarget.reset()
+  }
+  //LOGIN FUNCTION
+  const userLogin = (event) =>{
+    event.preventDefault()
+    axios 
+      .post('http://localhost:3000/user/login',
+      {
+        username: newUsername,
+        password: newPassword,
+      })
+      .then((response)=>{
+        setCurrentUser(response.data)
+        console.log(response.data.token)
+        getData() 
+      })
+      event.currentTarget.reset()
+  }
+  // LOG OUT 
+  const logoutUser = (user) =>{
+    console.log(user.token)
+    setCurrentUser()
+    // axios
+    //   .delete(`http://localhost:3000/user/delete`, 
+    //   {
+    //     token: user.token,
+    //     user: {
+    //       id: user.user.id,
+    //       username: user.user.username,
+    //       workoutscompleted: user.user.workoutscompleted,
+
+    //     }
+
+    //   })
+    //   .then((response)=>{
+    //     setCurrentUser()
+    //     console.log(response.data)
+    //     getData()
+    //   })
+  }
+  //ADD TO WORKOUT ARRAY
+  const addNewWorkout = (event) =>{
+    event.preventDefault()
+    console.log()
+    axios
+      .post(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
       {
         date: newWorkoutDate,
         time: newWorkoutTime,
@@ -90,101 +247,109 @@ const App = () =>{
         weight : newWorkoutWeight,
         meal: newMeal,
         comments: newComment,
-      }
-      ).then(()=>{
-        getData();
-      })
-    event.currentTarget.reset()
-  }
-  //UPDATE FUNCTION 
-  const editSubmit = (event, workoutData) =>{
-    event.preventDefault()
-    axios.put(`http://localhost:3000/workout/${workoutData._id}`,
-    {
-      date: newWorkoutDate || workoutData.date,
-      time: newWorkoutTime|| workoutData.time,
-      target : newWorkoutArea|| workoutData.target,
-      exercise : newWorkoutExercise || workoutData.exercise,
-      sets: newWorkoutSets || workoutData.sets,
-      reps : newWorkoutReps || workoutData.reps, 
-      weight : newWorkoutWeight || workoutData.weight,
-      meal: newMeal || workoutData.meal,
-      comments: newComment ||workoutData.comments,
-    }
-    ).then(()=>{
-      getData()
-          
-    })
-    event.currentTarget.reset()
-    setEditWorkout({})
-    document.querySelector('.edit-modal').classList.toggle('hidden')
-
-  }
-
-  //DELETE FUNCTION
-  const deleteWorkout = (workoutData) =>{
-    console.log(workoutData)
-    axios
-      .delete(`http://localhost:3000/workout/${workoutData._id}`)
-      .then(()=>{
+      } ).then((response)=>{
+        setCurrentUser(response.data)
+        setIndex(0)
         getData()
       })
+      event.currentTarget.reset( )
   }
-  // EDIT MODAL OPENER FUNCTION
-  const openEditModal = (workout) => {
-    document.querySelector('.edit-modal').classList.toggle('hidden')
-    setEditWorkout(workout)
-    
+  //REMOVE TO WORKOUT ARRAY 
+  const removeWorkout = (workoutData, index) =>{
+    console.log(workoutData, index)
+    axios
+      .delete(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`
+      ).then((response)=>{
+        console.log(response.data)
+        setCurrentUser(response.data)
+        getData()
+      })  
   }
-  //SIGN UP FUNCTION
-  const SignUpUser = (event) =>{
+  //EDIT TO WORKOUT ARRAY 
+  const editUSerWorkout = (event, workoutData) =>{
     event.preventDefault()
-    axios 
-      .post('http://localhost:3000/user/new',
+    console.log(workoutData)
+    axios
+      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`, 
       {
-        username: newUsername,
-        password: newPassword,
-      })
-      .then(()=>{
-        getData() 
+        date: newWorkoutDate || workoutData.date,
+        time: newWorkoutTime|| workoutData.time,
+        target : newWorkoutArea|| workoutData.target,
+        exercise : newWorkoutExercise || workoutData.exercise,
+        sets: newWorkoutSets || workoutData.sets,
+        reps : newWorkoutReps || workoutData.reps, 
+        weight : newWorkoutWeight || workoutData.weight,
+        meal: newMeal || workoutData.meal,
+        comments: newComment ||workoutData.comments,
+      }
+      ).then((response)=>{
+        console.log(response.data)
+        setEditWorkout({})
+        setCurrentUser(response.data)
+        getData()
       })
       event.currentTarget.reset()
+      setIndex(0)
+      document.querySelector('.edit-modal').classList.toggle('hidden')
   }
-  //LOGIN FUNCTION
-  const userLogin = (event) =>{
+  const editProfileSubmit = (event) => {
+    console.log('made it to the function')
     event.preventDefault()
-    axios 
-      .post('http://localhost:3000/sessions',
+    axios
+      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
       {
-        username: newUsername,
-        password: newPassword,
+        // profileHeight profileWeight profileImage
+        height: profileHeight || currentUser.user.height,
+        weight: profileWeight || currentUser.user.weight,
+        image: profileImage || currentUser.user.image
       })
-      .then(()=>{
-        getData() 
+      .then((response)=>{
+        console.log(response.data)
+        setCurrentUser(response.data)
+        getData()
       })
       event.currentTarget.reset()
+      document.querySelector('.profile-modal').classList.toggle('hidden')
+      setProfileImage("")
+      setUserWeight("")
+      setUserHeight("")
+
   }
   return (
     <>
     <div className="container-master">
-    <NavComponent/>
+    <NavComponent user={currentUser}
+    createNewUsername={createNewUsername}
+    createNewPassword={createNewPassword}
+    userLogin={userLogin}
+    SignUpUser={SignUpUser}
+    logout={logoutUser}
+    EditModalProfile={openEditModalProfile}
+    />
       <div className="container">
+      {currentUser ?
+          <>
           <div className="Workouts">
+            {currentUser.user === undefined ? <></> : 
+            <>
             {
-              allWorkouts.map((workout) =>{
+              currentUser.user.workouts.map((workout, index) =>{
                 return <>
                   <WorkoutComponent work={workout}
-                  delete={deleteWorkout}
-                  openModal={openEditModal}/>
+                  index={index}
+                  delete={removeWorkout}
+                  openModal={openEditModal}
+                  showInfo={showExtraInfo}/>
                 </>
               })
             }
+            </>} 
             <div className="">
               <img className="bottom-pic" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             </div>
           </div>
           <div className="workoutForm">
-            <form onSubmit={(event)=>{formSubmit(event)}}>
+            <form onSubmit={addNewWorkout}>
               <h4>ADD WORKOUT</h4>
               <span className="form-title">DATE</span><input type="date" onChange={newDate}/>
               <span className="form-title">TIME</span><input type="time" onChange={newTime}/>
@@ -198,28 +363,23 @@ const App = () =>{
               <input type="submit" value="submit"/>
             </form>
           </div>
+          </> 
+          : <div className="index">
+            <div>
+            <h1 className="index-logo"><span>Dev</span>Muscles</h1>
+            </div>
+            </div>
+            }
         </div>
       </div>
-      {/* <details>
-        <form className="userForm" onSubmit={(event)=>{SignUpUser(event)}}>
-        Username: <input type="text" onChange={createNewUsername}/>
-        Password: <input type="password" onChange={createNewPassword}/><br/>
-        <input type="submit" value="SIGN UP"/>
-        </form>
-      </details> */}
-      {/* <details>
-        <form className="userForm" onSubmit={(event)=>{userLogin(event)}}>
-        Username: <input type="text" onChange={createNewUsername}/>
-        Password: <input type="password" onChange={createNewPassword}/><br/>
-        <input type="submit" value="LOG IN"/>
-        </form>
-        <div>
-        <div className="nav icons">
-          <a>SIGN IN</a>
-          <a>JOIN US</a>
-        </div>
-      </div> 
-      </details> */}
+      <EditProfile user={currentUser}
+      ProfileImage={getProfileImage}
+      ProfileHeight={getProfileHeight}
+      ProfileWeight={getProfileWeight}
+      ProfileSubmit={editProfileSubmit}
+      setWeight={setUserWeight}
+      setHeight={setUserHeight}
+      setImage={setProfileImage}/>
       <EditModal
       setEditWorkout={setEditWorkout}
       editWorkout={editWorkout}
@@ -232,7 +392,7 @@ const App = () =>{
       newWeight={newWeight}
       newMeal={newWorkoutMeal}
       newComment={newWorkoutComment}
-      editSubmit={editSubmit}
+      editSubmit={editUSerWorkout}
       />
     </>
   );
