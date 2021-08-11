@@ -11,7 +11,7 @@ const EditModal = (props) =>{
         <>
         <div className="edit-modal hidden">
             <div className="editWorkoutForm">
-                <form onSubmit={(event)=>{props.editSubmit(event, props.editWorkout.workout, props.editWorkout.index)}}>
+                <form onSubmit={(event)=>{props.editSubmit(event, props.editWorkout)}}>
                 <p className="close-modal" onClick={closeEditModal}><i class="fa fa-times-circle"></i></p>
                     <h4>EDIT {props.editWorkout.exercise}</h4>
                     Date<input type="text" onChange={props.newDate} placeholder={props.editWorkout.date}/>

@@ -28,6 +28,8 @@ const App = () =>{
 // USER LOGIN
 
   const [currentUser, setCurrentUser] = useState()
+// INDEX
+  const [index, setIndex] = useState(0)
 
   //GET UPDATED DATA
   const getData = () => {
@@ -50,7 +52,6 @@ const App = () =>{
 // USE EFFECT
   useEffect(()=>{
     getData();
-    console.log(currentUser)
   },[])
 
 // WORKOUTS
@@ -111,30 +112,30 @@ const App = () =>{
   //     })
   //   event.currentTarget.reset()
   // }
-  //UPDATE FUNCTION 
-  const editSubmit = (event, workoutData) =>{
-    event.preventDefault()
-    axios.put(`http://localhost:3000/workout/${workoutData._id}`,
-    {
-      date: newWorkoutDate || workoutData.date,
-      time: newWorkoutTime|| workoutData.time,
-      target : newWorkoutArea|| workoutData.target,
-      exercise : newWorkoutExercise || workoutData.exercise,
-      sets: newWorkoutSets || workoutData.sets,
-      reps : newWorkoutReps || workoutData.reps, 
-      weight : newWorkoutWeight || workoutData.weight,
-      meal: newMeal || workoutData.meal,
-      comments: newComment ||workoutData.comments,
-    }
-    ).then(()=>{
-      getData()
+  //UPDATE FUNCTION (NOT ACTIVE)
+  // const editSubmit = (event, workoutData) =>{
+  //   event.preventDefault()
+  //   axios.put(`http://localhost:3000/workout/${workoutData._id}`,
+  //   {
+  //     date: newWorkoutDate || workoutData.date,
+  //     time: newWorkoutTime|| workoutData.time,
+  //     target : newWorkoutArea|| workoutData.target,
+  //     exercise : newWorkoutExercise || workoutData.exercise,
+  //     sets: newWorkoutSets || workoutData.sets,
+  //     reps : newWorkoutReps || workoutData.reps, 
+  //     weight : newWorkoutWeight || workoutData.weight,
+  //     meal: newMeal || workoutData.meal,
+  //     comments: newComment ||workoutData.comments,
+  //   }
+  //   ).then(()=>{
+  //     getData()
           
-    })
-    event.currentTarget.reset()
-    setEditWorkout({})
-    document.querySelector('.edit-modal').classList.toggle('hidden')
+  //   })
+  //   event.currentTarget.reset()
+  //   setEditWorkout({})
+  //   document.querySelector('.edit-modal').classList.toggle('hidden')
 
-  }
+  // }
 
   // //DELETE FUNCTION (NOT ACTIVE)
   // const deleteWorkout = (workoutData) =>{
@@ -147,9 +148,10 @@ const App = () =>{
   //     })
   // }
   // EDIT MODAL OPENER FUNCTION
-  const openEditModal = (workout) => {
+  const openEditModal = (workout, index) => {
     document.querySelector('.edit-modal').classList.toggle('hidden')
     setEditWorkout(workout)
+    setIndex(index)
     
   }
   //SIGN UP FUNCTION
@@ -226,8 +228,8 @@ const App = () =>{
         meal: newMeal,
         comments: newComment,
       } ).then((response)=>{
-        console.log(response.data)
         setCurrentUser(response.data)
+        setIndex(0)
         getData()
       })
   }
@@ -243,7 +245,7 @@ const App = () =>{
       })  
   }
   //EDIT TO WORKOUT ARRAY 
-  const editUSerWorkout = (event, workoutData, index) =>{
+  const editUSerWorkout = (event, workoutData) =>{
     event.preventDefault()
     console.log(workoutData)
     axios
@@ -260,12 +262,13 @@ const App = () =>{
         comments: newComment ||workoutData.comments,
       }
       ).then((response)=>{
-        // console.log(response.data)
-        // setCurrentUser(response.data)
+        console.log(response.data)
+        setEditWorkout({})
+        setCurrentUser(response.data)
         getData()
       })
       event.currentTarget.reset()
-      setEditWorkout({})
+      setIndex(0)
       document.querySelector('.edit-modal').classList.toggle('hidden')
   }
   return (
