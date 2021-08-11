@@ -127,18 +127,22 @@ select{
 .extra-info{
   margin: 0 auto;
   text-transform: uppercase;
-  display: flexbox;
+  display: flex;
   justify-content: space-around;
   align-items: center;
   text-align: center;
   width: 95%;
   /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2); */
   padding: 2%;
-  border-radius: 10px;
-  height: 80px;
+  border-radius: 0px 0px 10px 10px;
+  height: 50px;
+  margin-top: -2%;
   margin-bottom: 1%;
   color: #eee;
   background: #232227;
+}
+.test{
+  background: #eee;
 }
 .container-cards-master{
   background: #232227;

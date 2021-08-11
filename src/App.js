@@ -174,8 +174,8 @@ const App = () =>{
     document.querySelector('.profile-modal').classList.toggle('hidden')
   }
   // SHOW EXTRA INFO 
-  const showExtraInfo = () => {
-    document.querySelector('.extra-info').classList.toggle('hidden')
+  const showExtraInfo = (event, index) => {
+    document.querySelector(`#div${index}`).classList.toggle('hidden')
   }
 
   //SIGN UP FUNCTION
