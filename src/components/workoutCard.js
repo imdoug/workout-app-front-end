@@ -19,8 +19,8 @@ const WorkoutComponent = (props) =>{
                 <p className="exercise">{props.work.exercise}</p>
             </div>
             <div className="buttons">
-                <button id="edit-btn"type="button" onClick={()=>{props.openModal(props.work)}}>EDIT</button><br/>
-                <button id="del-btn"type="button" onClick={()=>{props.delete(props.work)}}>DELETE</button>
+                <button id="edit-btn"type="button" onClick={()=>{props.openModal(props.work, props.index)}}>EDIT</button><br/>
+                <button id="del-btn"type="button" onClick={()=>{props.delete(props.work, props.index)}}>DELETE</button>
             </div>
             <div className="comments hidden">
                 <p>Comments: <span>"{props.work.comments}"</span></p>

@@ -231,15 +231,42 @@ const App = () =>{
         getData()
       })
   }
-  const removeWorkout = (workoutData) =>{
+  //REMOVE TO WORKOUT ARRAY 
+  const removeWorkout = (workoutData, index) =>{
+    console.log(workoutData, index)
+    axios
+      .delete(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`
+      ).then((response)=>{
+        console.log(response.data)
+        setCurrentUser(response.data)
+        getData()
+      })  
+  }
+  //EDIT TO WORKOUT ARRAY 
+  const editUSerWorkout = (event, workoutData, index) =>{
+    event.preventDefault()
     console.log(workoutData)
-    // axios
-    //   .post(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}`,
-    //   ).then((response)=>{
-    //     console.log(response.data)
-    //     setCurrentUser(response.data)
-    //     getData()
-    //   })
+    axios
+      .put(`http://localhost:3000/user/${currentUser.user.id}/${currentUser.token}/${index}`, 
+      {
+        date: newWorkoutDate || workoutData.date,
+        time: newWorkoutTime|| workoutData.time,
+        target : newWorkoutArea|| workoutData.target,
+        exercise : newWorkoutExercise || workoutData.exercise,
+        sets: newWorkoutSets || workoutData.sets,
+        reps : newWorkoutReps || workoutData.reps, 
+        weight : newWorkoutWeight || workoutData.weight,
+        meal: newMeal || workoutData.meal,
+        comments: newComment ||workoutData.comments,
+      }
+      ).then((response)=>{
+        // console.log(response.data)
+        // setCurrentUser(response.data)
+        getData()
+      })
+      event.currentTarget.reset()
+      setEditWorkout({})
+      document.querySelector('.edit-modal').classList.toggle('hidden')
   }
   return (
     <>
@@ -256,9 +283,10 @@ const App = () =>{
           <div className="Workouts">
             {}
             {
-              currentUser.user.workouts.map((workout) =>{
+              currentUser.user.workouts.map((workout, index) =>{
                 return <>
                   <WorkoutComponent work={workout}
+                  index={index}
                   delete={removeWorkout}
                   openModal={openEditModal}/>
                 </>
@@ -305,7 +333,7 @@ const App = () =>{
       newWeight={newWeight}
       newMeal={newWorkoutMeal}
       newComment={newWorkoutComment}
-      editSubmit={editSubmit}
+      editSubmit={editUSerWorkout}
       />
     </>
   );
