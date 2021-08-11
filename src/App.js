@@ -24,6 +24,10 @@ const App = () =>{
 
   const [newUsername, setNewUsername] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  // USER PROFILE 
+  const [profileImage, setProfileImage] = useState('')
+  const [profileWeight, setUserWeight] = useState('')
+  const [profileHeight, setUserHeight] = useState('')
 
 // USER LOGIN
 
@@ -182,7 +186,6 @@ const App = () =>{
       .then((response)=>{
         setCurrentUser(response.data)
         console.log(response.data)
-        console.log(response.data.user.workoutscompleted)
         console.log(response.data.token)
         // getUser() 
         getData() 
@@ -232,6 +235,7 @@ const App = () =>{
         setIndex(0)
         getData()
       })
+      event.currentTarget.reset()
   }
   //REMOVE TO WORKOUT ARRAY 
   const removeWorkout = (workoutData, index) =>{
@@ -284,7 +288,8 @@ const App = () =>{
       {currentUser ?
           <>
           <div className="Workouts">
-            {}
+            {currentUser.user === undefined ? <></> : 
+            <>
             {
               currentUser.user.workouts.map((workout, index) =>{
                 return <>
@@ -294,7 +299,8 @@ const App = () =>{
                   openModal={openEditModal}/>
                 </>
               })
-            } 
+            }
+            </>} 
             <div className="">
               <img className="bottom-pic" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             </div>

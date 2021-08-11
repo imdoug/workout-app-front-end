@@ -177,11 +177,13 @@ h3{
 }
 .time{
   margin: 0;
+  margin-top: -7px;
 }
 .displayed-info{
   width: 25%;
 }
 .buttons{
+  text-align: right;
   width: 25%;
 }
 .bottom-pic{
@@ -268,13 +270,14 @@ section{
   margin-bottom: 4%;
 }
 .welcome{
-  margin-top: 20px;
+  margin-top: 10px;
   color:#fffa00;
 }
 .username{
+  margin-top: -5px;
+  font-family: 'Anton', sans-serif;
   text-transform: uppercase;
-  font-size: 1.2em;
-  margin-bottom: 20px;
+  font-size: 1.5em;
 }
 form img{
   overflow: hidden;
@@ -284,6 +287,54 @@ form img{
   width: 80px;
   height: 80px;
 }
+#login{
+  background: #000;
+}
+#login:hover{
+  background: #FEFD67;
+  border: 1px solid #FEFD67;
+  color: #000;
+}
+.pic-div{
+  margin: 20px 0px 10px 0px;
+}
+.height{
+  color:#999;
+  margin-top: 10px;
+}
+.weight{
+  color:#999;
+  margin-bottom: 20px;
+}
+.profile-pic{
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+summary{
+  color: #fffa00;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  font-family: 'Anton', sans-serif;
+}
+/* edit profile button */
+.edit-profile{
+  width: 50%;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #fffa00;
+}
+.edit-profile:hover{
+  background: #FEFD67;
+  border: 1px solid #FEFD67;
+  color: #000;
+}
+/*  */
 #edit-profile{
   margin-top: 20px;
 }
@@ -291,7 +342,7 @@ form img{
 .footer-nav{
   margin: 0 auto;
   width: 90%;
-  padding: 10px;
+  padding: 20px;
   color: #666;
 }
 .footer-nav a{
@@ -305,8 +356,16 @@ form img{
   #fffa00;
 }
 .logout{
-  margin: 0 auto;
   width: 50%;
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #fffa00;
+}
+.logout:hover{
+  background: #FEFD67;
+  border: 1px solid #FEFD67;
+  color: #000;
 }
 /* index */
 
