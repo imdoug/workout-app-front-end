@@ -44,15 +44,7 @@ const App = () =>{
         // console.log(response.data)
       })
   }
-  // //GET USER DATA
-  // const getUser = () => {
-  //   axios 
-  //     .get('http://localhost:3000/user/')
-  //     .then((response)=>{
-  //       setCurrentUser(response.data)
-  //       console.log(response.data)
-  //     })
-  // }
+
 // USE EFFECT
   useEffect(()=>{
     getData();
@@ -106,62 +98,6 @@ const App = () =>{
     setUserWeight(event.target.value)
   }
 
-  // //CREATE FUNCTION (NOT ACTIVE)
-  // const formSubmit = (event) =>{
-  //   event.preventDefault()
-  //   console.log("im working!");
-  //   axios.post('http://localhost:3000/workout/new',
-  //     {
-  //       date: newWorkoutDate,
-  //       time: newWorkoutTime,
-  //       target : newWorkoutArea,
-  //       exercise : newWorkoutExercise,
-  //       sets: newWorkoutSets,
-  //       reps : newWorkoutReps,
-  //       weight : newWorkoutWeight,
-  //       meal: newMeal,
-  //       comments: newComment,
-  //     }
-  //     ).then(()=>{
-  //       getData();
-  //     })
-  //   event.currentTarget.reset()
-  // }
-  //UPDATE FUNCTION (NOT ACTIVE)
-  // const editSubmit = (event, workoutData) =>{
-  //   event.preventDefault()
-  //   axios.put(`http://localhost:3000/workout/${workoutData._id}`,
-  //   {
-  //     date: newWorkoutDate || workoutData.date,
-  //     time: newWorkoutTime|| workoutData.time,
-  //     target : newWorkoutArea|| workoutData.target,
-  //     exercise : newWorkoutExercise || workoutData.exercise,
-  //     sets: newWorkoutSets || workoutData.sets,
-  //     reps : newWorkoutReps || workoutData.reps, 
-  //     weight : newWorkoutWeight || workoutData.weight,
-  //     meal: newMeal || workoutData.meal,
-  //     comments: newComment ||workoutData.comments,
-  //   }
-  //   ).then(()=>{
-  //     getData()
-          
-  //   })
-  //   event.currentTarget.reset()
-  //   setEditWorkout({})
-  //   document.querySelector('.edit-modal').classList.toggle('hidden')
-
-  // }
-
-  // //DELETE FUNCTION (NOT ACTIVE)
-  // const deleteWorkout = (workoutData) =>{
-  //   console.log(workoutData)
-  //   axios
-  //     .delete(`http://localhost:3000/workout/${workoutData._id}`)
-  //     .then((respnse)=>{
-
-  //       getData()
-  //     })
-  // }
   // EDIT MODAL OPENER FUNCTION
   const openEditModal = (workout, index) => {
     document.querySelector('.edit-modal').classList.toggle('hidden')
@@ -236,7 +172,7 @@ const App = () =>{
     event.preventDefault()
     console.log()
     axios
-      .post(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}`,
+      .post(`https://secure-plateau-25521.herokuapp.com/user/${currentUser.user.id}/${currentUser.token}`,
       {
         date: newWorkoutDate,
         time: newWorkoutTime,
@@ -258,7 +194,7 @@ const App = () =>{
   const removeWorkout = (workoutData, index) =>{
     console.log(workoutData, index)
     axios
-      .delete(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}/${index}`
+      .delete(`https://secure-plateau-25521.herokuapp.com/user/${currentUser.user.id}/${currentUser.token}/${index}`
       ).then((response)=>{
         console.log(response.data)
         setCurrentUser(response.data)
@@ -270,7 +206,7 @@ const App = () =>{
     event.preventDefault()
     console.log(workoutData)
     axios
-      .put(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}/${index}`, 
+      .put(`https://secure-plateau-25521.herokuapp.com/user/${currentUser.user.id}/${currentUser.token}/${index}`, 
       {
         date: newWorkoutDate || workoutData.date,
         time: newWorkoutTime|| workoutData.time,
@@ -296,7 +232,7 @@ const App = () =>{
     console.log('made it to the function')
     event.preventDefault()
     axios
-      .put(`https://secure-plateau-25521.herokuapp.com/${currentUser.user.id}/${currentUser.token}`,
+      .put(`https://secure-plateau-25521.herokuapp.com/user/${currentUser.user.id}/${currentUser.token}`,
       {
         // profileHeight profileWeight profileImage
         height: profileHeight || currentUser.user.height,

@@ -12,7 +12,6 @@ const Nav = (props) =>{
             </div>
             {props.user ?
             <>
-            {console.log(props.user)}
                 <div className="pic-div">
                     {props.user.user.image === "" ? <img className="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"/>  : <img className="profile-pic" src={props.user.user.image}/>}
                 </div>
