@@ -38,7 +38,7 @@ const App = () =>{
   //GET UPDATED DATA
   const getData = () => {
     axios 
-      .get('http://localhost:3000/workout')
+      .get('https://secure-plateau-25521.herokuapp.com/workout')
       .then((response)=>{
         setWorkouts(response.data)
         // console.log(response.data)
