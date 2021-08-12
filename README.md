@@ -19,7 +19,7 @@ On this app you can submit all your workout routines with the number of reps and
 - users can add their height 
 - users can add their weight 
 - users can add a profile picture (for now only with a picture link (from facebook or from anywhere where it was uploaded))
-- users can updated any or their profile info in case there is a typo or their lost or gain wheight so they can keep track of that
+- users can updated any of their profile info in case there is a typo or their lost or gain wheight so they can keep track of that
 #####  Log out 
 - on logout all information will be saved to the user profile and will be there on next login 
 
