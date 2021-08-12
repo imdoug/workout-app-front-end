@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# 💪 Workout Tracker DevMuscles
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### 📖 About this app 
+On this app you can submit all your workout routines with the number of reps and also the weight your lifting so you can  brag with all your friends. you can submit your workout exercices so you have that as your routine, and when you get bored and want to spicy things a little bit, you can update the workouts changing the weight or the number of repetitions or even the exercise itself. To make things even more personal, you have a profile available to you where you can add a profile picture, your height, your weight so you can keep track if your losing or gaining weight depending on your goal. As a person who forgets my workouts routines We've solved a problem for those who are like me creating this app that keep all this information in on place where the user can make the best of his workout without having to remeber things from their head.
 
-In the project directory, you can run:
+### User Actions 
 
-### `npm start`
+##### Sign up and Login
+- users can sign up creating a unique username and a password
+- user can login giving theirself the ability to use all functionalities of the app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### Workouts section
+- user can create a new workout filling the workout form (they can create as many as they want)
+- users can edit the workout in case the number of repetitions were too few or too much, or they want to change the exercise, they have the ability to uptade any information they want(if he leaves a field empty while editing the algorithm will keep the previus information instead of deleting and leaving it blank)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##### User's Profile
+- users can update the empty fields of their profile.
+- users can add their height 
+- users can add their weight 
+- users can add a profile picture (for now only with a picture link (from facebook or from anywhere where it was uploaded))
+- users can updated any or their profile info in case there is a typo or their lost or gain wheight so they can keep track of that
+#####  Log out 
+- on logout all information will be saved to the user profile and will be there on next login 
 
-### `npm test`
+> ### Technologies, lenguages and libraries used in this app
+> - Mongo db
+> - Express.js
+> - React 
+> - Node.js 
+> - CSS
+> - HTML
+> - JAVASCRIPT
+> - JWT
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+###### Future actions to be added 
+* let user upload picture from their computer 
+* add connection with a 3rd party API to serve nutrition information and workout tips to user 
 
-### `npm run build`
+> FrontEnd application live online at 
+> > https://devmuscle.herokuapp.com/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> BackEnd applicantion on my parthner github 
+>> https://github.com/kristianreyes7/movie-back-end
