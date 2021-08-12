@@ -116,7 +116,6 @@ select{
   align-items: center;
   text-align: center;
   width: 95%;
-  /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2); */
   padding: 2%;
   border-radius: 10px;
   height: 80px;
@@ -124,8 +123,11 @@ select{
   color: #eee;
   background: #232227;
 }
+.workout-item:hover{
+  cursor: pointer;
+  background: #2d2c33;
+}
 .extra-info{
-  
   margin: 0 auto;
   text-transform: uppercase;
   display: flex;
@@ -133,17 +135,17 @@ select{
   align-items: center;
   text-align: center;
   width: 95%;
-  /* box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.2); */
   padding: 2%;
   border-radius: 10px;
-  height: 50px;
-  /* animation: showAnimation 3s 0.5s ; */
   height: 50px;
   margin-top: -1%;
   margin-bottom: 1%;
   color: #eee;
   background: #232227;
   border-top:2px dashed #000;
+}
+.extra-info:hover{
+  cursor: pointer;
 }
 .extra-info span{
   color:#555;

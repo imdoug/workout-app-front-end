@@ -24,7 +24,7 @@ const WorkoutComponent = (props) =>{
                     <button id="del-btn"type="button" onClick={()=>{props.delete(props.work, props.index)}}>DELETE</button>
                 </div>
             </div>
-            <div id={"div" + props.index} className="extra-info hidden" onClick={props.showInfo}>
+            <div id={"div" + props.index} className="extra-info hidden" onClick={(event)=>{props.showInfo(event,props.index)}}>
                 <div><span>SETS:</span> {props.work.sets}</div>
                 <div><span>REPS:</span> {props.work.reps}</div>
                 <div><span>WEIGHT: </span> {props.work.weight}</div>
