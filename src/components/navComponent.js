@@ -29,7 +29,6 @@ const Nav = (props) =>{
                 Password: <input type="password" onChange={props.createNewPassword}/><br/>
                     <input id="login" type="submit" value="LOG IN"/>
             </form>
-            <img className="header-img" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             <details>
                 <summary>REGISTER</summary>
                 <form className="userForm" onSubmit={(event)=>{props.SignUpUser(event)}}>
@@ -38,6 +37,7 @@ const Nav = (props) =>{
                 <input id="login" type="submit" value="SIGN UP"/>
                 </form>
             </details> 
+            <img className="header-img" src="https://i.ibb.co/9cMmzG5/bg-img.png"/>
             </> }
             <footer>
                 <nav className="footer-nav">

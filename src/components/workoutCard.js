@@ -25,11 +25,11 @@ const WorkoutComponent = (props) =>{
                 </div>
             </div>
             <div id={"div" + props.index} className="extra-info hidden" onClick={props.showInfo}>
-                <div><p>COMMENTS:<span>"{props.work.comments}"</span></p></div>
-                <div><p>MEAL:<span>{props.work.meal}</span></p></div>
-                <div>SETS:<span>{props.work.sets}</span></div>
-                <div>REPS:<span>{props.work.reps}</span></div>
-                <div>WEIGHT: <span>{props.work.weight}</span></div>
+                <div><span>SETS:</span> {props.work.sets}</div>
+                <div><span>REPS:</span> {props.work.reps}</div>
+                <div><span>WEIGHT: </span> {props.work.weight}</div>
+                <div><span>MEAL:</span> {props.work.meal}</div>
+                <div><span>COMMENT:</span> "{props.work.comments}"</div>
             </div>
         </div>
         </>
