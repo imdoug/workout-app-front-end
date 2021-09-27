@@ -21,6 +21,7 @@ const App = () =>{
   const [editWorkout, setEditWorkout] = useState({})
   const [allWorkouts, setWorkouts] = useState([])
 
+  
 // USER STATES 
 
   const [newUsername, setNewUsername] = useState('')
@@ -29,7 +30,8 @@ const App = () =>{
   const [profileImage, setProfileImage] = useState('')
   const [profileWeight, setUserWeight] = useState('')
   const [profileHeight, setUserHeight] = useState('')
-// USER LOGIN
+
+// USER LOGIN 
 
   const [currentUser, setCurrentUser] = useState()
 // INDEX
@@ -97,7 +99,25 @@ const App = () =>{
   const getProfileWeight = (event)=>{
     setUserWeight(event.target.value)
   }
+  const cleanWoekoutsStates = ()=>{
 
+  }
+  const cleanWorkoutSatates = ()=>{
+    setNewWorkoutDate('')
+    setNewWorkoutTime('')
+    setNewWorkoutArea('')
+    setNwWorkoutExercise('')
+    setNewWorkoutReps('')
+    setNewWorkoutSets('')
+    setNewWorkoutWeight('')
+    setNewMeal('')
+    setNewComments('')
+  }
+  const cleanProfileStates = ()=>{
+    setUserHeight('')
+    setUserWeight('')
+    setProfileImage('')
+  }
   // EDIT MODAL OPENER FUNCTION
   const openEditModal = (workout, index) => {
     document.querySelector('.edit-modal').classList.toggle('hidden')
@@ -223,6 +243,7 @@ const App = () =>{
       }
       ).then((response)=>{
         console.log(response.data)
+        cleanWorkoutSatates()
         setEditWorkout({})
         setCurrentUser(response.data)
         getData()
@@ -244,9 +265,12 @@ const App = () =>{
       })
       .then((response)=>{
         console.log(response.data)
+
+        // 
         setCurrentUser(response.data)
         getData()
       })
+      cleanProfileStates()
       event.currentTarget.reset()
       document.querySelector('.profile-modal').classList.toggle('hidden')
   }
